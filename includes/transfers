@@ -1,0 +1,103 @@
+<h1 id="transfers">Transfers</h1>
+
+<p>Transfers endpoints allows to list user&rsquo;s history of withdrawals and deposits
+as well as order new withdrawal. </p>
+
+<aside class="warning">
+Setting outgoing addresses or bank accounts for withdrawals is not possible 
+through the API endpoints and has to be done on <a href="https://dgtmarket.com" target="_blank">dgtmarket.com</a> site in user panel settings.
+</aside>
+
+<h3 id="transfer-statuses">Transfer statuses</h3>
+
+<ul>
+<li><strong>IN_PROGRESS</strong></li>
+<li><strong>FINISHED</strong></li>
+</ul>
+
+<h3 id="transfer-types">Transfer types</h3>
+
+<ul>
+<li><strong>INCOMING</strong></li>
+<li><strong>OUTGOING</strong></li>
+</ul>
+
+<h2 id="order-a-new-transfer-withdrawal">Order a new Transfer (withdrawal)</h2>
+<pre class="highlight python"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'currency'</span><span class="p">:</span> <span class="s">'btc'</span><span class="p">,</span> 
+    <span class="s">'amount'</span><span class="p">:</span> <span class="mf">0.015</span><span class="p">,</span> 
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/transfer/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre>
+
+<p>Creating a new Transfer will withdraw an ordered amount of a choosen currency 
+to a proper configured <strong>outgoing_address</strong> (which you can check in the <a href="#wallets">wallets API endpoint</a>).</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /private/transfer/</code></p>
+
+<h3 id="paremeters">Paremeters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td><strong>BTC</strong> or <strong>PLN</strong> or <strong>LTC</strong></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Amount of a currency to withdrawal</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-transfer-details">Get a Transfer details</h2>
+
+<p>Endopoint that returns transfer details.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/transfers/:transfer_id/</code></p>
+
+<h2 id="list-transfers">List Transfers</h2>
+
+<p>Get a list of user transfers. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/transfers/</code></p>
+
+<h3 id="available-filtering">Available filtering</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>Available currencies: <strong>BTC</strong>, <strong>PLN</strong>,<strong>LTC</strong></td>
+</tr>
+<tr>
+<td>transfer_type</td>
+<td>Available <a href="#transfer-types">transfer types</a></td>
+</tr>
+<tr>
+<td>transfer_status</td>
+<td>Available <a href="#transfer-statuses">transfer statuses</a></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Limit number of results</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Offset</td>
+</tr>
+</tbody></table>

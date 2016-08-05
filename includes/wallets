@@ -1,0 +1,38 @@
+<h1 id="wallets">Wallets</h1>
+
+<h2 id="list-wallets">List wallets</h2>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"outgoing_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTC"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"incoming_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LeZNStaj1q8eseLa9Gqr8nvwp4iaGiX6rU"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"outgoing_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.33759934"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"incoming_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1JKhwNU45UE2j1f4CaEQLSHnPbycKqCKzG"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"outgoing_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PLN"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01557254"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"incoming_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78 1010 1023 0000 2613 9520 0000"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+
+<p>Get a list of user&rsquo;s wallets.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/wallets/</code></p>

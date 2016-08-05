@@ -1,0 +1,959 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Dgtmarket API Reference</title>
+
+    <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #f8f8f2;
+  background-color: #272822;
+}
+.highlight .err {
+  color: #151515;
+  background-color: #ac4142;
+}
+.highlight .c, .highlight .cd, .highlight .cm, .highlight .c1, .highlight .cs {
+  color: #505050;
+}
+.highlight .cp {
+  color: #f4bf75;
+}
+.highlight .nt {
+  color: #f4bf75;
+}
+.highlight .o, .highlight .ow {
+  color: #d0d0d0;
+}
+.highlight .p, .highlight .pi {
+  color: #d0d0d0;
+}
+.highlight .gi {
+  color: #90a959;
+}
+.highlight .gd {
+  color: #ac4142;
+}
+.highlight .gh {
+  color: #6a9fb5;
+  background-color: #151515;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #aa759f;
+}
+.highlight .kc {
+  color: #d28445;
+}
+.highlight .kt {
+  color: #d28445;
+}
+.highlight .kd {
+  color: #d28445;
+}
+.highlight .s, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #90a959;
+}
+.highlight .sr {
+  color: #75b5aa;
+}
+.highlight .si {
+  color: #8f5536;
+}
+.highlight .se {
+  color: #8f5536;
+}
+.highlight .nn {
+  color: #f4bf75;
+}
+.highlight .nc {
+  color: #f4bf75;
+}
+.highlight .no {
+  color: #f4bf75;
+}
+.highlight .na {
+  color: #6a9fb5;
+}
+.highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mb, .highlight .mx {
+  color: #90a959;
+}
+.highlight .ss {
+  color: #90a959;
+}
+    </style>
+    <link href="stylesheets/screen.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all.js"></script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;,&quot;python&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        NAV
+        <img src="images/navbar.png" />
+      </span>
+    </a>
+    <div class="tocify-wrapper">
+      <img src="images/logo.png" />
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">shell</a>
+              <a href="#" data-language-name="python">python</a>
+        </div>
+        <div class="search">
+          <input type="text" class="search" id="input-search" placeholder="Search">
+        </div>
+        <ul class="search-results"></ul>
+      <div id="toc">
+      </div>
+        <ul class="toc-footer">
+            <li><a href='https://dgtmarket.com'>Dgtmarket.com</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        
+          <h1 id="introduction">Introduction</h1>
+
+<p>Welcome to the Dgtmarket API! You can use our API to access Your Dgtmarket account.</p>
+
+<p>We have language bindings in Shell and Python! You can view code examples in the dark area to the
+right, and you can switch the programming language of the examples with the tabs in the top right.</p>
+
+<h2 id="api-url">API URL</h2>
+
+<p>API base URL for all endpoints is:</p>
+
+<p><strong>BASE_URL: https://dgtmarket.com/api</strong></p>
+
+<p>Use this URL as a prefix for the endpoints described in this documentation. Currently there is no sandbox instance of the API.</p>
+
+<h2 id="available-pairs">Available pairs</h2>
+
+<p>For API endpoints available pairs are: <strong>BTCPLN</strong>, <strong>LTCPLN</strong>, <strong>LTCBTC</strong></p>
+
+<h2 id="throttling">Throttling</h2>
+
+<p>API has rate limits set to <strong>60 requests per minute</strong> for public endpoints 
+and up to 100 requests per minute for private endpoints. If rate limit 
+is exceeded, server will response <strong>429 Too Many Requests</strong> status code.</p>
+
+          <h1 id="public">Public</h1>
+
+<h2 id="ticker">Ticker</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://dgtmarket.com/api/public/ticker24/BTCPLN/"</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"ask"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2652.50000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"bid"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2640.00000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"high"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2642.59000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"last"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2642.59000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"low"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2576.44000000"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"volume"</span><span class="p">:</span><span class="w"> </span><span class="s2">"8.50726555"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves ticker 24h.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /public/ticker24/:pair/</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pair</td>
+<td>false</td>
+<td>One of the <a href="#available-pairs">available pairs</a>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="list-offers">List Offers</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://dgtmarket.com/api/public/offers/BTCPLN"</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"asks"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.28889603"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2640.00000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.23111682"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2648.00000000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w">
+    </span><span class="nt">"bids"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.41148783"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2590.00000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00787401"</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w">
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2540.00000000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves aggregated offers in the orderbook. It returns
+maximum 30 best entries in each &lsquo;bids&rsquo; and &#39;asks&rsquo; tables ordered by quotation.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /public/offers/:pair/</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pair</td>
+<td>false</td>
+<td>One of the <a href="#available-pairs">available pairs</a>.</td>
+</tr>
+</tbody></table>
+
+<h2 id="list-transactions">List Transactions</h2>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight shell"><code>curl <span class="s2">"https://dgtmarket.com/api/public/transactions/BTCPLN/"</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.03311129"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1469385205"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2642.59000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="mi">7557</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07680608"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1469384081"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2630.00000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="mi">7556</span><span class="w">
+    </span><span class="p">},</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.04765030"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1469383603"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"price"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2586.93000000"</span><span class="p">,</span><span class="w">
+        </span><span class="nt">"tid"</span><span class="p">:</span><span class="w"> </span><span class="mi">7555</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+</span></code></pre>
+
+<p>This endpoint retrieves last 30 transactions ordered by date.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /public/transactions/:pair/</code></p>
+
+<h3 id="url-parameters">URL Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pair</td>
+<td>false</td>
+<td>One of the <a href="#available-pairs">available pairs</a>.</td>
+</tr>
+</tbody></table>
+
+          <h1 id="private">Private</h1>
+
+<p>Private API allows users to manage their accounts. Calling private API
+requires using authentication mechanism described in a sections below.
+This mechanism includes <strong>3 main steps</strong>:</p>
+
+<ol>
+<li><strong>Enabling API</strong></li>
+<li><strong>Generating API keys</strong></li>
+<li><strong>Synchronizing time with a server</strong></li>
+<li><strong>Authenticating requests</strong></li>
+</ol>
+
+          <h1 id="authentication">Authentication</h1>
+
+<h2 id="enabling-api">Enabling API</h2>
+
+<p>This is <strong>step 0</strong>. Actually to enable private API you have to send us an e-mail 
+(kontakt [at] dgtmarket.com or pomoc [at] dgtmarket.com) with API enabling request.
+After that you will have possibility to generate API keys throught the <a href="#get-api-keys">get token endpoint</a>.</p>
+
+<h2 id="get-api-keys">Get API keys</h2>
+
+<p>When your private API is enabled you can generate API keys. Calling this endpoint once again
+will revoke previous generated keys.</p>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://dgtmarket.com/api/public/token/'</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">'username'</span><span class="p">:</span> <span class="s">'john'</span><span class="p">,</span> <span class="s">'password'</span><span class="p">:</span> <span class="s">'secret'</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">key</span><span class="p">,</span> <span class="n">secret</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s">'key'</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s">'secret'</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://dgtmarket.com/api/public/token/"</span>
+    -X POST -d <span class="s2">"username=john"</span> -d <span class="s2">"password=secret"</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eiPe0nouwohghaujaiy1yievei2osai7keeriedo"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eiTahahBuaniz9peekuk7ohpi8einuiPhaeji1Oo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /public/token/</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>false</td>
+<td>Username.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>false</td>
+<td>Password.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-time">Get Time</h2>
+
+<p>Returns server&rsquo;s time in Unix epoch format.</p>
+<pre class="highlight shell"><code>curl https://dgtmarket.com/api/public/time/
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"epoch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1469386936</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /public/time/</code></p>
+
+<h2 id="authenticating-requests">Authenticating requests</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">hmac</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">AuthBase</span>
+
+
+<span class="k">class</span> <span class="nc">DgtmarketApiAuth</span><span class="p">(</span><span class="n">AuthBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">secret</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">secret</span> <span class="o">=</span> <span class="n">secret</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">path_url</span> <span class="o">+</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">body</span> <span class="ow">or</span> <span class="s">''</span><span class="p">)</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secret</span><span class="p">),</span> <span class="n">message</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s">'ACCESS-SIGN'</span><span class="p">:</span> <span class="n">signature</span><span class="p">,</span>
+            <span class="s">'ACCESS-TIMESTAMP'</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">,</span>
+            <span class="s">'ACCESS-KEY'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="n">request</span>
+
+
+<span class="c"># create DgtmarketApiAuth callable instance</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">DgtmarketApiAuth</span><span class="p">(</span><span class="s">'you_api_key'</span><span class="p">,</span> <span class="s">'your_secret_key'</span><span class="p">)</span>
+
+<span class="c"># example private API request using auth. Using verify=False to simplify.</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://dgtmarket.com/api/private/wallets/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre>
+
+<aside class="success">
+Authenticaton example class is presented in the Python section tab example on the right.
+</aside>
+
+<p>All requests to the private API have to be properly signed and requests have to include headers listed below:</p>
+
+<ul>
+<li><strong>ACCESS-KEY</strong> The api key as a string</li>
+<li><strong>ACCESS-SIGN</strong> The user generated message signature (see below)</li>
+<li><strong>ACCESS-TIMESTAMP</strong> A timestamp for your request</li>
+</ul>
+
+<p>All request bodies should have content type application/json and be valid JSON.</p>
+
+<p>The ACCESS-SIGN header is generated by creating a sha256 HMAC using the secret key on the prehash string timestamp + method + requestPath + body (where + represents string concatenation). The timestamp value is the same as the ACCESS-TIMESTAMP header.</p>
+
+<p>The body is the request body string or omitted if there is no request body (typically for GET requests).</p>
+
+<p>The method should be UPPER CASE.</p>
+
+<p>The ACCESS-TIMESTAMP header MUST be number of seconds since Unix Epoch.</p>
+
+<p>Your timestamp must be within 30 seconds of the api service time or your request will be considered expired and rejected. We recommend using the time endpoint to query for the API server time if you believe there many be time skew between your server and the API servers.</p>
+
+<aside class="warning">
+You have to take into account that trailing slashes matters. Do not to forget add trailing slashes to the url,
+because urls with and without trailing slashes produce totally different authentication signatures.
+</aside>
+
+          <h1 id="wallets">Wallets</h1>
+
+<h2 id="list-wallets">List wallets</h2>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"outgoing_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LTC"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"incoming_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"LeZNStaj1q8eseLa9Gqr8nvwp4iaGiX6rU"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"outgoing_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTC"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.33759934"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"incoming_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1JKhwNU45UE2j1f4CaEQLSHnPbycKqCKzG"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+    </span><span class="p">},</span><span class="w"> 
+    </span><span class="p">{</span><span class="w">
+        </span><span class="nt">"outgoing_address"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"PLN"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"balance"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.01557254"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"incoming_address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"78 1010 1023 0000 2613 9520 0000"</span><span class="p">,</span><span class="w"> 
+        </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+</span><span class="p">]</span><span class="w">
+
+</span></code></pre>
+
+<p>Get a list of user&rsquo;s wallets.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/wallets/</code></p>
+
+          <h1 id="offers">Offers</h1>
+
+<h2 id="place-new-offer">Place New Offer</h2>
+<pre class="highlight python"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'pair'</span><span class="p">:</span> <span class="s">'btcpln'</span><span class="p">,</span> 
+    <span class="s">'amount'</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span> 
+    <span class="s">'quotation'</span><span class="p">:</span> <span class="mi">2570</span><span class="p">,</span> 
+    <span class="s">'order_type'</span><span class="p">:</span> <span class="s">'buy'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/offers/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00100000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17167</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2570.00000000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /private/offers/</code></p>
+
+<h3 id="paremeters">Paremeters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pair</td>
+<td>One of <a href="#available-pairs">the available pairs</a></td>
+</tr>
+<tr>
+<td>order_type</td>
+<td><strong>BUY</strong> or <strong>SELL</strong></td>
+</tr>
+<tr>
+<td>quotation</td>
+<td>Quotation</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Amount of BTC (in BTCPLN pair) to buy or sell</td>
+</tr>
+<tr>
+<td>activation_limit</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td>any_price</td>
+<td>[optional] true or false</td>
+</tr>
+</tbody></table>
+
+<h2 id="cancel-offer">Cancel Offer</h2>
+<pre class="highlight python"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/offers/17167/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+</code></pre>
+
+<p>If successful server responses <strong>204 No Content</strong> status code.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE /private/offers/:offer_id/</code></p>
+
+<h2 id="get-an-offer-details">Get an Offer details</h2>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_CLOSED"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.086269"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.018452"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">8033</span><span class="w">
+    </span><span class="p">],</span><span class="w"> 
+    </span><span class="nt">"filled_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"253.03214996"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17169</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.87000000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/offers/:offer_id/</code></p>
+
+<h3 id="offer-statuses">Offer statuses</h3>
+
+<ul>
+<li><strong>OPENED</strong> means all actual offers not realized even partially.</li>
+<li><strong>PARTLY_REALIZED</strong> returns offers which are partly, but not completely realized. </li>
+<li><strong>REALIZED_CLOSED</strong> are all completely realized offers.</li>
+<li><strong>PARTLY_REALIZED_CLOSED</strong> are partially realized offers, but closed by user before realized completely</li>
+<li><strong>NOT_REALIZED_CLOSED</strong> means offer closed, but not realized event partially, eg. closed offer placed by mistake with improper quotation.</li>
+</ul>
+
+<p><strong>amount</strong> currency amount to buy or sell.</p>
+
+<p><strong>commission</strong> is in percents, eg. <code class="prettyprint">0.30000000</code> means commission value equals <code class="prettyprint">0.3%</code> of the offer value.</p>
+
+<p><strong>transactions</strong> returns a list of transactions&rsquo; ids connected to realized or partially realized offer.</p>
+
+<p><strong>filled_amount</strong> realized amount of the offer&rsquo;s <strong>amount</strong>.</p>
+
+<p><strong>blocked</strong> blocked currency amount for realization offer purposes</p>
+
+<h2 id="list-offers">List Offers</h2>
+
+<blockquote>
+<p>Example request with optional filtering</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /private/offers/?offer_status=REALIZED_CLOSED&amp;limit=3
+</code></pre>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1965</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_CLOSED"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.086269"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.018452"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mi">8033</span><span class="w">
+            </span><span class="p">],</span><span class="w"> 
+            </span><span class="nt">"filled_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"253.03214996"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17169</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.87000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_CLOSED"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T09:47:28.853000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T09:47:28.504034"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mi">8032</span><span class="w">
+            </span><span class="p">],</span><span class="w"> 
+            </span><span class="nt">"filled_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07800980"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07800980"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07800980"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17165</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2570.29000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_CLOSED"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T09:38:02.116077"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T09:38:02.061649"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mi">8031</span><span class="w">
+            </span><span class="p">],</span><span class="w"> 
+            </span><span class="nt">"filled_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05638905"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05638905"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"145.17981202"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17164</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2574.61000000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w"> 
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dgtmarket.com/api/private/offers/?limit=3&amp;offer_status=REALIZED_CLOSED&amp;offset=3"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>Get list of user offers. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/offers/</code></p>
+
+<h3 id="available-filtering">Available filtering</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_type</td>
+<td>BUY or SELL</td>
+</tr>
+<tr>
+<td>offer_status</td>
+<td>Available <a href="#offer-statuses">offer statuses</a></td>
+</tr>
+<tr>
+<td>pair</td>
+<td>Available <a href="#available-pairs">pairs</a></td>
+</tr>
+<tr>
+<td>date_start</td>
+<td>Filters offers with date equal or newer than <strong>date_start</strong></td>
+</tr>
+<tr>
+<td>date_end</td>
+<td>Filters offers with date equal or older than <strong>date_end</strong></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Limit number of results</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Offset</td>
+</tr>
+</tbody></table>
+
+          <h1 id="transactions">Transactions</h1>
+
+<h2 id="get-a-transaction-details">Get a Transaction details</h2>
+<pre class="highlight python"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/transactions/8033/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.037002"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8033</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.87000000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/transactions/:transaction_id/</code></p>
+
+<h2 id="list-transactions">List Transactions</h2>
+
+<blockquote>
+<p>Example request with optional filtering</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/transactions/?limit=3'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2006</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T11:05:59.447869"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.06915566"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8035</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.23000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:43:34.681738"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05935927"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8034</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2570.71000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.037002"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8033</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.87000000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w"> 
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dgtmarket.com/api/private/transactions/?limit=3&amp;offset=3&amp;pair=btcpln"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Get list of user transactions. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/transactions/</code></p>
+
+<h3 id="available-filtering">Available filtering</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pair</td>
+<td>Available <a href="#available-pairs">pairs</a> (default is BTCPLN)</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Limit number of results</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Offset</td>
+</tr>
+</tbody></table>
+
+          <h1 id="transfers">Transfers</h1>
+
+<p>Transfers endpoints allows to list user&rsquo;s history of withdrawals and deposits
+as well as order new withdrawal. </p>
+
+<aside class="warning">
+Setting outgoing addresses or bank accounts for withdrawals is not possible 
+through the API endpoints and has to be done on <a href="https://dgtmarket.com" target="_blank">dgtmarket.com</a> site in user panel settings.
+</aside>
+
+<h3 id="transfer-statuses">Transfer statuses</h3>
+
+<ul>
+<li><strong>IN_PROGRESS</strong></li>
+<li><strong>FINISHED</strong></li>
+</ul>
+
+<h3 id="transfer-types">Transfer types</h3>
+
+<ul>
+<li><strong>INCOMING</strong></li>
+<li><strong>OUTGOING</strong></li>
+</ul>
+
+<h2 id="order-a-new-transfer-withdrawal">Order a new Transfer (withdrawal)</h2>
+<pre class="highlight python"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'currency'</span><span class="p">:</span> <span class="s">'btc'</span><span class="p">,</span> 
+    <span class="s">'amount'</span><span class="p">:</span> <span class="mf">0.015</span><span class="p">,</span> 
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/transfer/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre>
+
+<p>Creating a new Transfer will withdraw an ordered amount of a choosen currency 
+to a proper configured <strong>outgoing_address</strong> (which you can check in the <a href="#wallets">wallets API endpoint</a>).</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /private/transfer/</code></p>
+
+<h3 id="paremeters">Paremeters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td><strong>BTC</strong> or <strong>PLN</strong> or <strong>LTC</strong></td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Amount of a currency to withdrawal</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-a-transfer-details">Get a Transfer details</h2>
+
+<p>Endopoint that returns transfer details.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/transfers/:transfer_id/</code></p>
+
+<h2 id="list-transfers">List Transfers</h2>
+
+<p>Get a list of user transfers. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/transfers/</code></p>
+
+<h3 id="available-filtering">Available filtering</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>currency</td>
+<td>Available currencies: <strong>BTC</strong>, <strong>PLN</strong>,<strong>LTC</strong></td>
+</tr>
+<tr>
+<td>transfer_type</td>
+<td>Available <a href="#transfer-types">transfer types</a></td>
+</tr>
+<tr>
+<td>transfer_status</td>
+<td>Available <a href="#transfer-statuses">transfer statuses</a></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Limit number of results</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Offset</td>
+</tr>
+</tbody></table>
+
+          <h1 id="errors">Errors</h1>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">shell</a>
+                <a href="#" data-language-name="python">python</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>

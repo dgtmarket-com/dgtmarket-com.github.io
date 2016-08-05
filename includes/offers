@@ -1,0 +1,243 @@
+<h1 id="offers">Offers</h1>
+
+<h2 id="place-new-offer">Place New Offer</h2>
+<pre class="highlight python"><code><span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">'pair'</span><span class="p">:</span> <span class="s">'btcpln'</span><span class="p">,</span> 
+    <span class="s">'amount'</span><span class="p">:</span> <span class="mf">0.001</span><span class="p">,</span> 
+    <span class="s">'quotation'</span><span class="p">:</span> <span class="mi">2570</span><span class="p">,</span> 
+    <span class="s">'order_type'</span><span class="p">:</span> <span class="s">'buy'</span>
+<span class="p">}</span>
+
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/offers/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00100000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17167</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2570.00000000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">POST /private/offers/</code></p>
+
+<h3 id="paremeters">Paremeters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pair</td>
+<td>One of <a href="#available-pairs">the available pairs</a></td>
+</tr>
+<tr>
+<td>order_type</td>
+<td><strong>BUY</strong> or <strong>SELL</strong></td>
+</tr>
+<tr>
+<td>quotation</td>
+<td>Quotation</td>
+</tr>
+<tr>
+<td>amount</td>
+<td>Amount of BTC (in BTCPLN pair) to buy or sell</td>
+</tr>
+<tr>
+<td>activation_limit</td>
+<td>[optional]</td>
+</tr>
+<tr>
+<td>any_price</td>
+<td>[optional] true or false</td>
+</tr>
+</tbody></table>
+
+<h2 id="cancel-offer">Cancel Offer</h2>
+<pre class="highlight python"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">delete</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/offers/17167/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+</code></pre>
+
+<p>If successful server responses <strong>204 No Content</strong> status code.</p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">DELETE /private/offers/:offer_id/</code></p>
+
+<h2 id="get-an-offer-details">Get an Offer details</h2>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_CLOSED"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.086269"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.018452"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="mi">8033</span><span class="w">
+    </span><span class="p">],</span><span class="w"> 
+    </span><span class="nt">"filled_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"253.03214996"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17169</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.87000000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/offers/:offer_id/</code></p>
+
+<h3 id="offer-statuses">Offer statuses</h3>
+
+<ul>
+<li><strong>OPENED</strong> means all actual offers not realized even partially.</li>
+<li><strong>PARTLY_REALIZED</strong> returns offers which are partly, but not completely realized. </li>
+<li><strong>REALIZED_CLOSED</strong> are all completely realized offers.</li>
+<li><strong>PARTLY_REALIZED_CLOSED</strong> are partially realized offers, but closed by user before realized completely</li>
+<li><strong>NOT_REALIZED_CLOSED</strong> means offer closed, but not realized event partially, eg. closed offer placed by mistake with improper quotation.</li>
+</ul>
+
+<p><strong>amount</strong> currency amount to buy or sell.</p>
+
+<p><strong>commission</strong> is in percents, eg. <code class="prettyprint">0.30000000</code> means commission value equals <code class="prettyprint">0.3%</code> of the offer value.</p>
+
+<p><strong>transactions</strong> returns a list of transactions&rsquo; ids connected to realized or partially realized offer.</p>
+
+<p><strong>filled_amount</strong> realized amount of the offer&rsquo;s <strong>amount</strong>.</p>
+
+<p><strong>blocked</strong> blocked currency amount for realization offer purposes</p>
+
+<h2 id="list-offers">List Offers</h2>
+
+<blockquote>
+<p>Example request with optional filtering</p>
+</blockquote>
+<pre class="highlight plaintext"><code>GET /private/offers/?offer_status=REALIZED_CLOSED&amp;limit=3
+</code></pre>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">1965</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_CLOSED"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.086269"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.018452"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mi">8033</span><span class="w">
+            </span><span class="p">],</span><span class="w"> 
+            </span><span class="nt">"filled_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"253.03214996"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17169</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.87000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_CLOSED"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T09:47:28.853000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T09:47:28.504034"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mi">8032</span><span class="w">
+            </span><span class="p">],</span><span class="w"> 
+            </span><span class="nt">"filled_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07800980"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07800980"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.07800980"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17165</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2570.29000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"status"</span><span class="p">:</span><span class="w"> </span><span class="s2">"REALIZED_CLOSED"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"any_price"</span><span class="p">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"updated"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T09:38:02.116077"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"activation_limit"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"order_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"created"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T09:38:02.061649"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transactions"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+                </span><span class="mi">8031</span><span class="w">
+            </span><span class="p">],</span><span class="w"> 
+            </span><span class="nt">"filled_amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05638905"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.00000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05638905"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"blocked"</span><span class="p">:</span><span class="w"> </span><span class="s2">"145.17981202"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">17164</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2574.61000000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w"> 
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dgtmarket.com/api/private/offers/?limit=3&amp;offer_status=REALIZED_CLOSED&amp;offset=3"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+
+</span></code></pre>
+
+<p>Get list of user offers. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/offers/</code></p>
+
+<h3 id="available-filtering">Available filtering</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>order_type</td>
+<td>BUY or SELL</td>
+</tr>
+<tr>
+<td>offer_status</td>
+<td>Available <a href="#offer-statuses">offer statuses</a></td>
+</tr>
+<tr>
+<td>pair</td>
+<td>Available <a href="#available-pairs">pairs</a></td>
+</tr>
+<tr>
+<td>date_start</td>
+<td>Filters offers with date equal or newer than <strong>date_start</strong></td>
+</tr>
+<tr>
+<td>date_end</td>
+<td>Filters offers with date equal or older than <strong>date_end</strong></td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Limit number of results</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Offset</td>
+</tr>
+</tbody></table>

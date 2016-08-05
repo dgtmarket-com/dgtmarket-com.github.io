@@ -1,0 +1,12 @@
+<h1 id="private">Private</h1>
+
+<p>Private API allows users to manage their accounts. Calling private API
+requires using authentication mechanism described in a sections below.
+This mechanism includes <strong>3 main steps</strong>:</p>
+
+<ol>
+<li><strong>Enabling API</strong></li>
+<li><strong>Generating API keys</strong></li>
+<li><strong>Synchronizing time with a server</strong></li>
+<li><strong>Authenticating requests</strong></li>
+</ol>

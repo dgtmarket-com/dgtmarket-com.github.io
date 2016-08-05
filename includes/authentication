@@ -1,0 +1,140 @@
+<h1 id="authentication">Authentication</h1>
+
+<h2 id="enabling-api">Enabling API</h2>
+
+<p>This is <strong>step 0</strong>. Actually to enable private API you have to send us an e-mail 
+(kontakt [at] dgtmarket.com or pomoc [at] dgtmarket.com) with API enabling request.
+After that you will have possibility to generate API keys throught the <a href="#get-api-keys">get token endpoint</a>.</p>
+
+<h2 id="get-api-keys">Get API keys</h2>
+
+<p>When your private API is enabled you can generate API keys. Calling this endpoint once again
+will revoke previous generated keys.</p>
+
+<blockquote>
+<p>Example Request</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="s">'https://dgtmarket.com/api/public/token/'</span><span class="p">,</span>
+    <span class="n">data</span><span class="o">=</span><span class="p">{</span><span class="s">'username'</span><span class="p">:</span> <span class="s">'john'</span><span class="p">,</span> <span class="s">'password'</span><span class="p">:</span> <span class="s">'secret'</span><span class="p">}</span>
+<span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">json</span><span class="p">()</span>
+<span class="n">key</span><span class="p">,</span> <span class="n">secret</span> <span class="o">=</span> <span class="n">r</span><span class="p">[</span><span class="s">'key'</span><span class="p">],</span> <span class="n">r</span><span class="p">[</span><span class="s">'secret'</span><span class="p">]</span>
+</code></pre>
+<pre class="highlight shell"><code>curl <span class="s2">"https://dgtmarket.com/api/public/token/"</span>
+    -X POST -d <span class="s2">"username=john"</span> -d <span class="s2">"password=secret"</span>
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"key"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eiPe0nouwohghaujaiy1yievei2osai7keeriedo"</span><span class="p">,</span><span class="w">
+    </span><span class="nt">"secret"</span><span class="p">:</span><span class="w"> </span><span class="s2">"eiTahahBuaniz9peekuk7ohpi8einuiPhaeji1Oo"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /public/token/</code></p>
+
+<h3 id="query-parameters">Query Parameters</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>username</td>
+<td>false</td>
+<td>Username.</td>
+</tr>
+<tr>
+<td>password</td>
+<td>false</td>
+<td>Password.</td>
+</tr>
+</tbody></table>
+
+<h2 id="get-time">Get Time</h2>
+
+<p>Returns server&rsquo;s time in Unix epoch format.</p>
+<pre class="highlight shell"><code>curl https://dgtmarket.com/api/public/time/
+</code></pre>
+
+<blockquote>
+<p>Example Response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"epoch"</span><span class="p">:</span><span class="w"> </span><span class="mi">1469386936</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /public/time/</code></p>
+
+<h2 id="authenticating-requests">Authenticating requests</h2>
+<pre class="highlight python"><code><span class="kn">import</span> <span class="nn">hmac</span>
+<span class="kn">import</span> <span class="nn">hashlib</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">import</span> <span class="nn">requests</span>
+<span class="kn">from</span> <span class="nn">requests.auth</span> <span class="kn">import</span> <span class="n">AuthBase</span>
+
+
+<span class="k">class</span> <span class="nc">DgtmarketApiAuth</span><span class="p">(</span><span class="n">AuthBase</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">secret</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">key</span> <span class="o">=</span> <span class="n">key</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">secret</span> <span class="o">=</span> <span class="n">secret</span>
+
+    <span class="k">def</span> <span class="nf">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">request</span><span class="p">):</span>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()))</span>
+        <span class="n">message</span> <span class="o">=</span> <span class="n">timestamp</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">method</span> <span class="o">+</span> <span class="n">request</span><span class="o">.</span><span class="n">path_url</span> <span class="o">+</span> <span class="p">(</span><span class="n">request</span><span class="o">.</span><span class="n">body</span> <span class="ow">or</span> <span class="s">''</span><span class="p">)</span>
+        <span class="n">signature</span> <span class="o">=</span> <span class="n">hmac</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">secret</span><span class="p">),</span> <span class="n">message</span><span class="p">,</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">)</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+
+        <span class="n">request</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">update</span><span class="p">({</span>
+            <span class="s">'ACCESS-SIGN'</span><span class="p">:</span> <span class="n">signature</span><span class="p">,</span>
+            <span class="s">'ACCESS-TIMESTAMP'</span><span class="p">:</span> <span class="n">timestamp</span><span class="p">,</span>
+            <span class="s">'ACCESS-KEY'</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">key</span><span class="p">,</span>
+        <span class="p">})</span>
+        <span class="k">return</span> <span class="n">request</span>
+
+
+<span class="c"># create DgtmarketApiAuth callable instance</span>
+<span class="n">auth</span> <span class="o">=</span> <span class="n">DgtmarketApiAuth</span><span class="p">(</span><span class="s">'you_api_key'</span><span class="p">,</span> <span class="s">'your_secret_key'</span><span class="p">)</span>
+
+<span class="c"># example private API request using auth. Using verify=False to simplify.</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s">'https://dgtmarket.com/api/private/wallets/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">,</span> <span class="n">verify</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
+</code></pre>
+
+<aside class="success">
+Authenticaton example class is presented in the Python section tab example on the right.
+</aside>
+
+<p>All requests to the private API have to be properly signed and requests have to include headers listed below:</p>
+
+<ul>
+<li><strong>ACCESS-KEY</strong> The api key as a string</li>
+<li><strong>ACCESS-SIGN</strong> The user generated message signature (see below)</li>
+<li><strong>ACCESS-TIMESTAMP</strong> A timestamp for your request</li>
+</ul>
+
+<p>All request bodies should have content type application/json and be valid JSON.</p>
+
+<p>The ACCESS-SIGN header is generated by creating a sha256 HMAC using the secret key on the prehash string timestamp + method + requestPath + body (where + represents string concatenation). The timestamp value is the same as the ACCESS-TIMESTAMP header.</p>
+
+<p>The body is the request body string or omitted if there is no request body (typically for GET requests).</p>
+
+<p>The method should be UPPER CASE.</p>
+
+<p>The ACCESS-TIMESTAMP header MUST be number of seconds since Unix Epoch.</p>
+
+<p>Your timestamp must be within 30 seconds of the api service time or your request will be considered expired and rejected. We recommend using the time endpoint to query for the API server time if you believe there many be time skew between your server and the API servers.</p>
+
+<aside class="warning">
+You have to take into account that trailing slashes matters. Do not to forget add trailing slashes to the url,
+because urls with and without trailing slashes produce totally different authentication signatures.
+</aside>

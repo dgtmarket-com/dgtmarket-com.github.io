@@ -1,0 +1,98 @@
+<h1 id="transactions">Transactions</h1>
+
+<h2 id="get-a-transaction-details">Get a Transaction details</h2>
+<pre class="highlight python"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/transactions/8033/'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.037002"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30000000"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8033</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.87000000"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/transactions/:transaction_id/</code></p>
+
+<h2 id="list-transactions">List Transactions</h2>
+
+<blockquote>
+<p>Example request with optional filtering</p>
+</blockquote>
+<pre class="highlight python"><code><span class="n">r</span> <span class="o">=</span> <span class="n">requests</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">server_address</span> <span class="o">+</span> <span class="s">'/private/transactions/?limit=3'</span><span class="p">,</span> <span class="n">auth</span><span class="o">=</span><span class="n">auth</span><span class="p">)</span>
+</code></pre>
+
+<blockquote>
+<p>Example response</p>
+</blockquote>
+<pre class="highlight json"><code><span class="p">{</span><span class="w">
+    </span><span class="nt">"count"</span><span class="p">:</span><span class="w"> </span><span class="mi">2006</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"previous"</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> 
+    </span><span class="nt">"results"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T11:05:59.447869"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.06915566"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8035</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.23000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:43:34.681738"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"SELL"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.05935927"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8034</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2570.71000000"</span><span class="w">
+        </span><span class="p">},</span><span class="w"> 
+        </span><span class="p">{</span><span class="w">
+            </span><span class="nt">"date"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2016-07-29T10:13:47.037002"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"transaction_type"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BUY"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"commission"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.30000000"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"amount"</span><span class="p">:</span><span class="w"> </span><span class="s2">"0.09846107"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"pair"</span><span class="p">:</span><span class="w"> </span><span class="s2">"BTCPLN"</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">8033</span><span class="p">,</span><span class="w"> 
+            </span><span class="nt">"quotation"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2569.87000000"</span><span class="w">
+        </span><span class="p">}</span><span class="w">
+    </span><span class="p">],</span><span class="w"> 
+    </span><span class="nt">"next"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://dgtmarket.com/api/private/transactions/?limit=3&amp;offset=3&amp;pair=btcpln"</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre>
+
+<p>Get list of user transactions. </p>
+
+<h3 id="http-request">HTTP Request</h3>
+
+<p><code class="prettyprint">GET /private/transactions/</code></p>
+
+<h3 id="available-filtering">Available filtering</h3>
+
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td>pair</td>
+<td>Available <a href="#available-pairs">pairs</a> (default is BTCPLN)</td>
+</tr>
+<tr>
+<td>limit</td>
+<td>Limit number of results</td>
+</tr>
+<tr>
+<td>offset</td>
+<td>Offset</td>
+</tr>
+</tbody></table>
